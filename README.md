@@ -63,7 +63,7 @@ catalog         -   Índice onde ficam organizados os id dos sensores desejados.
 ## Operacao:
 1. Corpo técnico ou gestores acessam o Painel de Indicadores através do navegador.
 2. Usuário então seleciona a competência apropriada para o relatório (Default = Último mês), e clica na empresa de que se deseja analisar, neste momento o script makecatalog.py é acionado.
-3. Sistema executa uma chamada HTTP (POST) à API PRTG, que responde no formato JSON
+3. Sistema executa uma chamada HTTP (GET) à API PRTG, que responde no formato JSON
 4. Sistema constrói e exibe relatorio
 
 
@@ -120,7 +120,7 @@ A partir deste ponto, o script busca pelas **tags** já pré-definidas e constro
 
 ### Siga os procedimentos para adicionar **tags** a sensores.
 
-1. Após acessar o PRTG, vá a página de algum id em que você deseje identificar através de uma tag e clique em Settings.
+1. Após acessar o PRTG, vá a página de algum item que você deseje identificar através de uma tag e clique em Settings.
 
 ![Alt Text](https://i.ibb.co/sH9znNh/settings.png)
 
@@ -130,7 +130,23 @@ A partir deste ponto, o script busca pelas **tags** já pré-definidas e constro
 
 Nosso script utiliza as seguintes **tags**:
 
-![Alt Text](https://i.ibb.co/qFCM3HJ/capture.png)
+|Tags|Função|
+|:---|:-----|
+|pidlded|Tag para encontrar sensores que são links dedicados|
+|pidswitch|Tag para encontrar sensores que são switches|
+|pidout|Tag para encontrar outros dispositivos|
+|pidsplunk|Tag para encontrar o id do sensor do splunk|
+|pidlint|Tag para encontrar sensores que são links de internet|
+
+|Sub-Tags|Função|
+|:-------|:-----|
+|site:xxx|Tag para indicar a localidade dos sensores|
+|isp:xxx|Tag para indicar a provedora de internet daquele sensor|
+|tipodolink:xxx|Tag para indicar tipo do link|
+|-|-|
+|-|-|
+|rows:x|Tag para encontrar o número de células unidas|
+|-|-|
 
 **Sub tags** significam tags que estão atrelados a uma **tag** principal. Por exemplo, a tag **pidlded** indica sensores de links dedicados, que por sua vez possuem mais informações, como a provedora, o tipo de link e a localidade. Estas tags também devem ser criadas para que a geração de relatório aconteça de forma eficiente. 
 
